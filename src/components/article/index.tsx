@@ -17,9 +17,14 @@ const Article: React.FC<Props> = ({ articles, title }) => {
       {articles
         ? articles.map((article, index) => {
             // ニュースが何時間前に記載されたかの表示
-            const time = moment(article.publishedAt || moment.now())
-              .fromNow()
-              .slice(0, 1)
+            const time =
+              moment(article.publishedAt || moment.now())
+                .fromNow()
+                .slice(0, 1) == 'a'
+                ? 1
+                : moment(article.publishedAt || moment.now())
+                    .fromNow()
+                    .slice(0, 1)
             return (
               // 記事の内容を別タブで表示させる
               <a href={article.url} key={index} target="_blank" rel="noopener">
