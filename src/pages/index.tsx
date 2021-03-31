@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import MainLayout from '../layouts'
+import styles from '../styles/Home.module.scss'
+import Article from '../components/article'
 
 export default function Home(props: any) {
   // 記事を取得できているか確認
@@ -9,6 +11,11 @@ export default function Home(props: any) {
       <Head>
         <title>Simple News</title>
       </Head>
+
+      {/* Article コンポーネントを表示する */}
+      <div className={styles.main}>
+        <Article title="headlines" articles={props.topArticles} />
+      </div>
     </MainLayout>
   )
 }
