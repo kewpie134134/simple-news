@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.scss'
 import Article from '../components/article'
 import Nav from '../components/nav'
 import WeatherNews from '../components/weather-news'
+import PickupArticle from '../components/pickup-article'
 
 export default function Home(props: any) {
   return (
@@ -26,7 +27,10 @@ export default function Home(props: any) {
           <Article title="headline" articles={props.topArticles} />
         </div>
         <div className={styles.aside}>
+          {/* 天気コンポーネントを表示する */}
           <WeatherNews weatherNews={props.weatherNews} />
+          {/* ピックアップ記事コンポーネントを表示する */}
+          <PickupArticle articles={props.pickupArticles} />
         </div>
       </div>
     </MainLayout>
@@ -53,10 +57,21 @@ export const getStaticProps = async () => {
   const weatherJson = await weatherRes.json()
   const weatherNews = weatherJson
 
+  // NewsAPI のピックアップ記事の情報を取得する
+  const keyword = 'software' // キーワードで検索（ソフトウェア）
+  const sortBy = 'popularity' // 表示順位（人気順）
+  const pickupPageSize = 5 // ページサイズ（5）
+  const pickupRes = await fetch(
+    `https://newsapi.org/v2/everything?q=${keyword}&language=jp&sortBy=${sortBy}&pageSize=${pickupPageSize}&apiKey=79efafa3ff2a4f82b73922c267c269e6`,
+  )
+  const pickupJson = await pickupRes.json()
+  const pickupArticles = pickupJson?.articles
+
   return {
     props: {
       topArticles,
       weatherNews,
+      pickupArticles,
     },
     revalidate: 60 * 10,
   }
