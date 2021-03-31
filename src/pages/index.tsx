@@ -50,7 +50,7 @@ export const getStaticProps = async () => {
   // OpenWeatherMap の天気の情報を取得(ここでは東京の座標を入力している)。
   const lat = 35.4122
   const lon = 139.413
-  const exclude = 'hourly,minutely' // 取得しない情報（１時間ごとの天気情報と1分間ごとの天気情報）
+  const exclude = 'minutely' // 取得しない情報（1分間ごとの天気情報）
   const weatherRes = await fetch(
     `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=${exclude}&appid=15187bb00ec45d2282a8ebd4e1f8a7b5`,
   )
@@ -73,6 +73,6 @@ export const getStaticProps = async () => {
       weatherNews,
       pickupArticles,
     },
-    revalidate: 60 * 10,
+    revalidate: 30 * 10,
   }
 }
