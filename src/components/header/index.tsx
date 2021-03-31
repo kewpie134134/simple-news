@@ -3,7 +3,7 @@ import styles from './index.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Header() {
+function Header() {
   return (
     <section className={styles.container}>
       <header className={styles.header}>
@@ -11,6 +11,7 @@ export default function Header() {
           <Image
             src="/img/headerIcon/menu.png"
             alt="menu icon"
+            loading="eager"
             width={35}
             height={35}
             priority
@@ -28,3 +29,5 @@ export default function Header() {
     </section>
   )
 }
+
+export default Header

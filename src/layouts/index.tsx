@@ -6,7 +6,7 @@ type LayoutProps = {
   children: React.ReactNode
 }
 
-export default function MainLayout({ children }: LayoutProps): JSX.Element {
+function MainLayout({ children }: LayoutProps): JSX.Element {
   return (
     <>
       <Header />
@@ -14,3 +14,5 @@ export default function MainLayout({ children }: LayoutProps): JSX.Element {
     </>
   )
 }
+
+export default MainLayout
